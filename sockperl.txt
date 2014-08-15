@@ -1,0 +1,13 @@
+       OS/2 Upload Information Template for ftp-os2.nmsu.edu
+
+Archive Name: sockperl.zip
+Program Description: Perl 4 for os/2 with Sockets
+Operating System Versions: 2.x
+Program Source: perl 4.036
+Replaces:
+
+Your name: Forrest Whitcher
+Your email address: fw@world.std.com
+
+Proposed directory for placement: 32bit/unix
+

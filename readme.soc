@@ -1,0 +1,63 @@
+
+Perl for os/2 with sockets. (this build also has use of crypt(), fork()
+and -D debug options). Built using emx 09a with fix03 applied. This
+build passes all the regression tests as the distribution version of
+perl.exe. Of course this version won't run under dos at all, presumably 
+the sock_ini call is protect-mode only.
+
+No changes were made to Kai's sources for perl / os2. The link command 
+to build this version is:
+
+gcc -o perl os2/perl.def array.o cmd.o cons.o consarg.o doarg.o doio.o \
+ dolist.o dump.o eval.o form.o hash.o perl.o perly.o regcomp.o regexec.o \
+ stab.o str.o toke.o util.o os2.o suffix.o -llibufc -los2 -lsocket -ltcpip
+
+The use of Holger's tcpip.a library has been called a gross and icky
+hack. Probably true, but I've nothing like the time to add the *ent()
+to the emx distribution, and it works nicely.
+
+I've renamed the executable in the .zip because it's not the standard
+distribution.
+
+libufc.a was built using emx 0.8g from Eric Young's libdes. While some of
+the sources are marked for FSF copyleft, I obtained them from an ftp site
+restricted to US only access. As such, I will provide no source pointer
+to this code. Crypt() is not, to my knowlege, in any way export restricted.
+(I'm using crupt() as a hash for establishing session keys for point-to
+point encryption over a socket)
+
+I've included a couple of working scripts for a client and server. They're
+there only to illustrate what methods used in the 'camel book' examples
+won't work (yet) under os/2. send, eval_cry.pl establish a des encrypted
+socket for running little perls on a server. The .nf versions are done
+without using fork(), which wasn't inheriting socket handles when I
+first started working on this.
+
+In as much as I've made no source changes I feel there are no indicated
+copyright implications. (i.e. This executable is derived exactly from
+the perl 4.036 distribution with additional sources from Raymond Chen 
+and Kai Uwe Rommel). The perl os/2 distribution is available from
+'hobbes.nmsu.edu' (os2/32bit/unix/perl.zip) and 'ftp.cdrom.com'.
+
+I've run the entire test battery (using a csh script, as I don't have
+MAKE). Aside from pure Unixisms and problems in comparing strings
+with '<cr><lf>' on os/2 the only unexplaind error I found was in
+op/magic.t, where SIG action "DEFAULT" is supported? The only
+other anomaly is that this perl stops creating new sockets after the
+257th. Perhaps this is an os/2 or os/2 tcpip limitation.
+
+I have taken reasonable care in testing the resultant binary, but of 
+course there is NO WARRANTY. I have tested only a small subset of the
+perl or emx support for berkely sockets.
+
+Thanks as always to Larry for perl, Kai for the os/2 version, and
+Eberhard Mattes for the excellent EMX environment.
+
+Forrest Whitcher              fw@world.std.com
+Boston Scientific Corp.
+Watertown MA 02272            617.972.4289
+
+
+
+
+
